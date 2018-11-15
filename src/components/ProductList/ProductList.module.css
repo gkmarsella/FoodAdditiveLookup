@@ -1,0 +1,7 @@
+.ProductList {
+    background-color: bisque;
+}
+
+.ProductList ul {
+    list-style-type: none;
+}
