@@ -2,11 +2,11 @@
     font-family: 'Work Sans', sans-serif;
 }
 
-.ProductListLi {
-    background-color: rgb(226, 231, 250);
-    box-shadow: 2px 3px black;
+.ProductList li {
+    background-color: rgb(245, 247, 252);
+    box-shadow: 0 2px 3px rgba(55, 55, 55, 0.756);
     list-style-type: none;
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 0 0 15px 0;
     padding: 8px;
     cursor: pointer;
@@ -20,12 +20,16 @@
             user-select: none
 }
 
-.ProductListLi:hover {
+.ProductList li:hover {
     background-color: rgb(182, 211, 237);
-    font-family: 'Work Sans', sans-serif;
 }
 
-.ProductListUl {
+.ProductList li:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 1px rgba(55, 55, 55, 0.756);
+}
+
+.ProductList ul {
     border-radius: 5px;
     border: 1px solid black;
     list-style: none;

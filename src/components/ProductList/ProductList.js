@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import classes from './ProductList.module.css';
 import axios from 'axios';
-import additives from '../../Additives.js'
+import additives from '../../Additives.js';
+import AdditiveList from '../AdditiveList/AdditveList';
 
 class Product extends Component {
     state = {
-        ingredients: ['No data found']
+        products: [],
+        ingredients: ['No data found'],
+        additivesInProduct: []
     }
 
     searchIngredients = (ndbno) => {
@@ -25,12 +28,18 @@ class Product extends Component {
             ingredients.split(', ').map(ing => {
                 ing in additives ? foundAdditives.push(ing) : console.log('not found')
             })
+            console.log(ingredients);
         })
         .catch(error => {
             alert('error caught after looking through ingredients for additives', error)
         })
         .then( _ => {
-            console.log(foundAdditives)
+            this.setState({
+                additivesInProduct: foundAdditives
+            })
+        })
+        .catch(error => {
+            alert('Error caught setting state for found additives');
         })
     }
 
@@ -41,15 +50,18 @@ class Product extends Component {
                 <li 
                 onClick={() => this.searchIngredients(food.ndbno)}
                 key={food.ndbno} 
-                className={classes.ProductListLi}>{food.name}</li>
+                >{food.name}</li>
             )
         } );
 
         return (
             <div>
-                <ul className={classes.ProductListUl}>
-                    {Products}
-                </ul>
+                <AdditiveList additives={this.state.additivesInProduct}/>
+                <div className={classes.ProductList}>
+                    <ul>
+                        {Products}
+                    </ul>
+                </div>
             </div>
         );
     }

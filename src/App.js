@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ProductList from './components/ProductList/ProductList';
-import classes from './App.module.css'
+// import AdditiveList from './components/AdditiveList/AdditveList';
+import classes from './App.module.css';
 
 class App extends Component {
   constructor(props){
@@ -65,7 +66,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App">  
         <form onSubmit={this.onSubmit} className={classes.SearchBar}>
           <input type='text' value={this.state.searchValue} onChange={this.onChange}/>
           <button>Search</button>
