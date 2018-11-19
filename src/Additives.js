@@ -10,14 +10,14 @@ const additives = {
         'description':'color',
         'usage':'color',
         'Health Risks': 'kind of',
-        'image':'coming soon',
+        'image':'https://sep.yimg.com/ay/yhst-128631805714435/fd-c-red-no-40-aluminum-lake-1-oz-3.gif',
         'source': 'some website'
     },
     'red 40': {
         'description':'color',
         'usage':'color',
         'Health Risks': 'kind of',
-        'image':'coming soon',
+        'image':'https://sep.yimg.com/ay/yhst-128631805714435/fd-c-red-no-40-aluminum-lake-1-oz-3.gif',
         'source': 'some website'
     },
     'blue 1': {

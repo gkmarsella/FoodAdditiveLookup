@@ -16,6 +16,7 @@ class AdditiveList extends Component {
                         description={Additives[add].description}
                         uses={Additives[add].uses}
                         risks={Additives[add].risks}
+                        image={Additives[add].image}
                     />
                 )
             }

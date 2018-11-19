@@ -1,22 +1,33 @@
 .Additive {
     background-color: rgb(192, 218, 192);
-    width: 20%;
-    height: 200px;
+    width: 300px;
+    height: 400px;
     margin: 2%;
     border-radius: 4px;
     border: 1px solid black;
     text-align: center;
+    overflow: auto;
 }
 
-.AdditiveList img {
-    background-color: green;
-    max-width: 100%;
-    max-height: 100%;
+.Additive img {
+    max-width: 90%;
+    max-height: 90%;
     display: block;
     margin: auto;
+    border-radius: 4px;
+    border: 1px solid black;
 }
 
+/* Name of additive */
+.Additive h4 {
+    margin: auto;
+    padding-bottom: 3%;
+}
+
+/* Descripiton, Uses, Health Risks.. */
 .Additive p {
     margin-top: 0;
     font-weight: bold;
+    text-align: left;
+    overflow: auto;
 }

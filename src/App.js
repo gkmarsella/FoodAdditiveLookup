@@ -9,18 +9,13 @@ class App extends Component {
     super(props);
     this.state = {
       products: [],
-      searchValue: '',
-      test: null
+      searchValue: ''
     };
-  }
-  
-  onChange = (event) => {
-    this.setState({searchValue: event.target.value})
-    console.log('changed')
   }
 
   //Searching for a food by a keyword. Creates a list (shown at ProductList)
   onSubmit = (event) => {
+    this.setState({searchValue: event.target.value})
     event.preventDefault()
     const food = this.state.searchValue;
     const key = process.env.REACT_APP_USDA_CODE;
@@ -32,15 +27,12 @@ class App extends Component {
     axios.get('https://api.nal.usda.gov/ndb/search/?format=json&max=15&sort=n&offset=0',
      {params:{q:food, api_key:key}})
       .then(response => {
-        console.log('[response]', response.data)
         results = (response.data['list']['item']);
       })
       .catch(error => {
-        console.log('[after first then]: '  + error);
-        alert('no results');
+        alert('no results', error);
       })
       .then(function () {
-        console.log('[results]', results);
         for(let i=0; i < results.length; i++){
           if ( results[i]['ds'] === 'LI' ){
             justNames.push({name:results[i]['name'].match(upcRegex)[0], ndbno:results[i]['ndbno']})
@@ -53,8 +45,7 @@ class App extends Component {
         }
       })
       .catch(error => {
-        console.log('[after second then]: ' + error)
-        alert('No results')
+        alert('No results', error)
       })
       .then(() => {
         this.setState({
@@ -68,11 +59,10 @@ class App extends Component {
     return (
       <div className="App">  
         <form onSubmit={this.onSubmit} className={classes.SearchBar}>
-          <input type='text' value={this.state.searchValue} onChange={this.onChange}/>
+          <input type='text' defaultValue={this.state.searchValue}/>
           <button>Search</button>
         </form>
         <ProductList products={this.state.products}/>
-        {this.state.test}
       </div>
     );
   }
