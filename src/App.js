@@ -3,6 +3,9 @@ import axios from 'axios';
 import ProductList from './components/ProductList/ProductList';
 // import AdditiveList from './components/AdditiveList/AdditveList';
 import classes from './App.module.css';
+import Navbar from './components/Navigation/Navbar/Navbar';
+
+const usda_key = process.env.REACT_APP_USDA_KEY;
 
 class App extends Component {
   constructor(props){
@@ -12,25 +15,34 @@ class App extends Component {
       searchValue: ''
     };
   }
+  // refs
+  // cb function after set state
+// look up super
+
+  onChange = (event) => {
+    this.setState({searchValue: event.target.value});
+  }
 
   //Searching for a food by a keyword. Creates a list (shown at ProductList)
   onSubmit = (event) => {
-    this.setState({searchValue: event.target.value})
     event.preventDefault()
     const food = this.state.searchValue;
     const key = process.env.REACT_APP_USDA_CODE;
     let results = null;
     let justNames = [];
     // Matches everything before UPC so the name looks clean when save
-    let upcRegex = /^.*(?=(\, UPC:))/;
-    let gtinRegex = /^.*(?=(\, GTIN:))/;
-    axios.get('https://api.nal.usda.gov/ndb/search/?format=json&max=15&sort=n&offset=0',
-     {params:{q:food, api_key:key}})
+    let upcRegex = /^.*(?=(, UPC:))/;
+    let gtinRegex = /^.*(?=(, GTIN:))/;
+    const data = {
+      'generalSearchInput':food
+    };
+    axios.post('https://api.nal.usda.gov/fdc/v1/search/?api_key=' + usda_key, data)
       .then(response => {
+        console.log(response);
         results = (response.data['list']['item']);
       })
       .catch(error => {
-        alert('no results', error);
+        console.log('no results', error);
       })
       .then(function () {
         for(let i=0; i < results.length; i++){
@@ -45,7 +57,7 @@ class App extends Component {
         }
       })
       .catch(error => {
-        alert('No results', error)
+        console.log('No results', error)
       })
       .then(() => {
         this.setState({
@@ -58,8 +70,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">  
+        <Navbar />
         <form onSubmit={this.onSubmit} className={classes.SearchBar}>
-          <input type='text' defaultValue={this.state.searchValue}/>
+          <input type='text' value={this.state.searchValue} onChange={this.onChange}/>
           <button>Search</button>
         </form>
         <ProductList products={this.state.products}/>

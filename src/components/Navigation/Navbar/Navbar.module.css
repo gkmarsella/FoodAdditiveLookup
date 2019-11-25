@@ -1,0 +1,26 @@
+.Navbar {
+    background-color: green;
+    display: flex;
+    height: 50px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+
+.Navbar .Logo {
+    background-color: white;
+    border: 1px solid black;
+    width: 75px;
+    margin: 5px;
+}
+
+.Navbar div {
+    background-color: white;
+    border: 1px solid black;
+    width: 75px;
+    margin: 5px;
+    float: right;
+}

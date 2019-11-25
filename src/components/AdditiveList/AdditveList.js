@@ -4,13 +4,15 @@ import Additives from '../../Additives';
 import AdditiveCard from './AdditiveCard/AdditiveCard';
 
 class AdditiveList extends Component {
+    state = {
+        show: false
+    }
     render() {
-        console.log(Additives);
         const AdditivesFound = (this.props.additives)
         .map( add => {
             if(Additives[add]){
                 return (
-                    <AdditiveCard 
+                    <AdditiveCard
                         key={add}
                         name={add}
                         description={Additives[add].description}
@@ -19,7 +21,7 @@ class AdditiveList extends Component {
                         image={Additives[add].image}
                     />
                 )
-            }
+            } return false;
         } );
         return (
             <div>

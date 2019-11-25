@@ -18,17 +18,15 @@ class Product extends Component {
         axios.get('https://api.nal.usda.gov/ndb/reports',
         {params:{ndbno:ndbno, type:'f', api_key:key}})
         .then( response => {
-            // console.log( (response.data['report']['food']['ing']['desc']).toLowerCase() )
             ingredients = (response.data['report']['food']['ing']['desc']).toLowerCase();
         })
         .catch(error => {
             alert('error caught after searching for ingredients', error)
         })
         .then( _ => {
-            ingredients.split(', ').map(ing => {
+            ingredients.split(', ').forEach(ing => {
                 ing in additives ? foundAdditives.push(ing) : console.log('not found')
             })
-            console.log(ingredients);
         })
         .catch(error => {
             alert('error caught after looking through ingredients for additives', error)
@@ -47,16 +45,17 @@ class Product extends Component {
         const Products = (this.props.products)
         .map( food => {
             return (
-                <li 
-                onClick={() => this.searchIngredients(food.ndbno)}
-                key={food.ndbno} 
-                >{food.name}</li>
-            )
+                <div>   
+                    <li onClick={() => this.searchIngredients(food.ndbno)} key={food.ndbno}>
+                        <span>{food.name}</span>
+                    </li>
+                </div>
+            );
         } );
 
         return (
             <div>
-                <AdditiveList additives={this.state.additivesInProduct}/>
+                <AdditiveList show={this.state.viewing} additives={this.state.additivesInProduct}/>
                 <div className={classes.ProductList}>
                     <ul>
                         {Products}
